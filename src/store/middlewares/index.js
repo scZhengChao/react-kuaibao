@@ -1,4 +1,9 @@
-import thunk from "redux-thunk";  //配合改装dispatch 支持函数
+import thunk from "redux-thunk";
 import { applyMiddleware } from 'redux'
+const filterNil = () =>next => action => {
+    if (action) {
+        next(action)
+    }
+}
 
-export default applyMiddleware(thunk)
+export default applyMiddleware(thunk,filterNil)
