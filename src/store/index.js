@@ -7,9 +7,6 @@ const devToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_D
 let store = createStore(
     reducer,
     preloadedState,
-    compose(
         enhancer,
-        devToolsExtension
-    ),
 );
 export default store;

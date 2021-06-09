@@ -2,12 +2,8 @@
 import './App.css';
 import {
     Switch,
-    BrowserRouter,
     Route ,
-    HashRouter,
     Redirect,
-    Link,
-    NavLink,
 } from 'react-router-dom';
 import Home from './pages/login'
 

@@ -1,6 +1,6 @@
 const  preloadedState = {
-    appInfo:{
-
+    detail:{
+        appid:'15082810674'
     }
 }
 

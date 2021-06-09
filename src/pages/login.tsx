@@ -1,34 +1,45 @@
 import React,{ PureComponent} from 'react'
 import  {connect} from 'react-redux'
+import CryptoJS from 'crypto-js'
+import moment from 'dayjs'
 interface PropsType {
-    store:any
+    store:any,
+    detail:any
 }
 interface  StateTypes {
-
+    num:number
 }
-const initMapStateToProps = (state:any)=>{
+const connects: Function = connect;
+@connects((state:any)=>{
     return {
-        store:state
+        store:state,
+        detail:state.detail || {}
     }
-}
-const initMapDispatchToProps = (dispatch:any)=>{
+},(dispatch:any)=>{
     return {
-
+        add:()=>dispatch({type:'list/test1',payload:{name:'login--dispatch'}})
     }
-}
-
-@connect(initMapStateToProps,initMapDispatchToProps)
+})
 class Login extends PureComponent<PropsType,StateTypes>{
     constructor(props:PropsType) {
         super(props);
+        this.state = {
+            num:0,
+        }
     }
     componentDidMount(){
-        console.log(this.props.store,'---s--')
+        const password = this.getPasswordWithDate()
+    }
+    public getPasswordWithDate=()=>{
+        const secret = moment().format('YYYY-MM-DD')
+        var hash = CryptoJS.HmacSHA1("electroncabinet", secret).toString(CryptoJS.enc.Hex);
+        const password = hash.substr(moment().day(),6)
+        return password
     }
     render(){
         return (
             <div>
-                asgasfa
+
             </div>
         )
     }
