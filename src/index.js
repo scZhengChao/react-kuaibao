@@ -3,13 +3,22 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { BrowserRouter, Route} from 'react-router-dom';
-import { Provider } from 'react-redux'; //为react状态管理的插件包
-import store from './store/index';
+import { Provider } from 'react-redux';
+import {store,persistor} from './store/index';
+import zhCN from 'antd/lib/locale/zh_CN';
+import { ConfigProvider } from 'antd';
+import moment from 'moment';
+import 'moment/locale/zh-cn';
+import 'antd/dist/antd.css';
+moment.locale('zh-cn');
+
 ReactDOM.render(
     <Provider store={store}>
-        <BrowserRouter>
-            <Route component={App} />
-        </BrowserRouter>
+        <ConfigProvider locale={zhCN}>
+            <BrowserRouter>
+                <Route component={App} />
+            </BrowserRouter>
+        </ConfigProvider>
     </Provider>,
   document.getElementById('root'),
     () => {

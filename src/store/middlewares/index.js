@@ -1,4 +1,5 @@
 import thunk from "redux-thunk";
+import logger from "redux-logger";
 import { applyMiddleware } from 'redux'
 const filterNil = () =>next => action => {
     if (action) {
@@ -6,4 +7,4 @@ const filterNil = () =>next => action => {
     }
 }
 
-export default applyMiddleware(thunk,filterNil)
+export default applyMiddleware(thunk,filterNil,logger)

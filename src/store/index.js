@@ -1,12 +1,26 @@
 
 import { createStore,compose} from 'redux'
-import preloadedState from './state';
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
+
+import preloadedState from './preloadedState';
 import reducer from './reducers/index';
 import enhancer from  './middlewares'
-const devToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : ()=>{}
-let store = createStore(
-    reducer,
+
+const persistConfig = {
+    key: 'root',
+    storage,  //AsyncStorage  react-native
+    whitelist:['detail'],
+    blacklist:['list'],
+    timeout: null,
+}
+const persistedReducer = persistReducer(persistConfig, reducer)
+const devToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (next:any)=>next
+export const  store = createStore(
+    persistedReducer,
     preloadedState,
-        enhancer,
+    compose(
+        enhancer, devToolsExtension
+    )
 );
-export default store;
+export const persistor = persistStore(store)
