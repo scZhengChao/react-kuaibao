@@ -1,8 +1,13 @@
 import React,{ PureComponent} from 'react'
-import  {connect} from 'react-redux'
 import CryptoJS from 'crypto-js'
 import moment from 'dayjs'
 import { Button } from 'antd';
+// import { bindActionCreators } from 'redux'
+// import * as todoActionCreators from './todoActionCreators'
+// import * as counterActionCreators from './counterActionCreators'
+
+import { ThemeContext} from '../context/themeContext'
+import enHanceronnect from '../uitls/connect'
 interface PropsType {
     store:any,
     name:string,
@@ -11,18 +16,20 @@ interface  StateTypes {
     num:number,
     password:string,
 }
-const connects: Function = connect;
-@connects((state:any)=>{
+
+@enHanceronnect((state:any,ownProps:any)=>{
     return {
-        store:state,
         name:state.detail.name || ''
     }
-},(dispatch:any)=>{
+},(dispatch:any,ownProps:any)=>{
     return {
-        add:(data)=>dispatch({type:'detail/test1',payload:{name:data}})
+        add:(data)=>dispatch({type:'detail/test1',payload:{name:data}}),
+        // actions:bindActionCreators(Object.assign({}, todoActionCreators, counterActionCreators), dispatch)
+
     }
 })
 class Login extends PureComponent<PropsType,StateTypes>{
+    static contextType = ThemeContext
     constructor(props:PropsType) {
         super(props);
         this.state = {
@@ -34,9 +41,8 @@ class Login extends PureComponent<PropsType,StateTypes>{
         this.getPasswordWithDate()
     }
     public handle = (e)=>{
-        const { add,name} = this.props
-        const data  = e.nativeEvent.data
-        add(name+data)
+        const { add,} = this.props
+        add(e.target.value)
     }
     public getPasswordWithDate=()=>{
         const secret = moment().format('YYYY-MM-DD')

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import { ThemeContext,themes } from './context/themeContext'
 import { BrowserRouter, Route} from 'react-router-dom';
 import { Provider } from 'react-redux';
 import {store,persistor} from './store/index';
@@ -16,7 +17,9 @@ ReactDOM.render(
     <Provider store={store}>
         <ConfigProvider locale={zhCN}>
             <BrowserRouter>
-                <Route component={App} />
+                <ThemeContext.Provider value={themes.dark}>
+                    <Route component={App} />
+                </ThemeContext.Provider>
             </BrowserRouter>
         </ConfigProvider>
     </Provider>,
