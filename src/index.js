@@ -9,8 +9,10 @@ import {store,persistor} from './store/index';
 import zhCN from 'antd/lib/locale/zh_CN';
 import { ConfigProvider } from 'antd';
 import moment from 'moment';
+import ErrorBoundary from './components/errorBoundary'
 import 'moment/locale/zh-cn';
 import 'antd/dist/antd.css';
+
 moment.locale('zh-cn');
 
 ReactDOM.render(
@@ -18,7 +20,9 @@ ReactDOM.render(
         <ConfigProvider locale={zhCN}>
             <BrowserRouter>
                 <ThemeContext.Provider value={themes.dark}>
-                    <Route component={App} />
+                    <ErrorBoundary>
+                        <Route component={App} />
+                    </ErrorBoundary>
                 </ThemeContext.Provider>
             </BrowserRouter>
         </ConfigProvider>
