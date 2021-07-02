@@ -6,7 +6,7 @@ interface ISProps {
 const List: React.FC<ISProps> = (props,children) => {
     const value = useContext(ThemeContext);
     return (
-        <div>
+        <div style={value}>
             asfasf
         </div>
     )

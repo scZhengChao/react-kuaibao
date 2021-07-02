@@ -2,9 +2,6 @@ import React,{ PureComponent} from 'react'
 import CryptoJS from 'crypto-js'
 import moment from 'dayjs'
 import { Button } from 'antd';
-// import { bindActionCreators } from 'redux'
-// import * as todoActionCreators from './todoActionCreators'
-// import * as counterActionCreators from './counterActionCreators'
 
 import { ThemeContext} from '../context/themeContext'
 import enHanceronnect from '../uitls/connect'

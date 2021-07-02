@@ -5,14 +5,13 @@ import App from './App';
 import { ThemeContext,themes } from './context/themeContext'
 import { BrowserRouter, Route} from 'react-router-dom';
 import { Provider } from 'react-redux';
-import {store,persistor} from './store/index';
+import {store} from './store/index';
 import zhCN from 'antd/lib/locale/zh_CN';
 import { ConfigProvider } from 'antd';
 import moment from 'moment';
 import ErrorBoundary from './components/errorBoundary'
 import 'moment/locale/zh-cn';
 import 'antd/dist/antd.css';
-
 moment.locale('zh-cn');
 
 ReactDOM.render(
