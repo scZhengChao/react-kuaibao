@@ -2,9 +2,10 @@ import React,{ PureComponent} from 'react'
 import CryptoJS from 'crypto-js'
 import moment from 'dayjs'
 import { Button } from 'antd';
-
+import Memoization from './memoization'
 import { ThemeContext} from '../context/themeContext'
 import enHanceronnect from '../uitls/connect'
+import  { Map,is,List,fromJS} from 'immutable'
 interface PropsType {
     store:any,
     name:string,
@@ -36,7 +37,25 @@ class Login extends PureComponent<PropsType,StateTypes>{
     }
     componentDidMount(){
         this.getPasswordWithDate()
+
+        // immutable 数据；详情见笔记
+        // const Component = React.createClass({
+        //     getInitialState() {
+        //         return {
+        //             data: { times: 0 }
+        //         }
+        //     },
+        //     handleAdd() {
+        //         let data = _.cloneDeep(this.state.data);
+        //         data.times = data.times + 1;
+        //         this.setState({ data: data });
+        //     }
+        // }
+
+
+
     }
+
     public handle = (e)=>{
         const { add,} = this.props
         add(e.target.value)
@@ -56,7 +75,31 @@ class Login extends PureComponent<PropsType,StateTypes>{
                 <input onChange={this.handle}/>
                 <hr/>
                 <Button type="primary" >Button</Button>
-                <input value={name} readOnly={true} />
+                <input value={name} readOnly={true} /><br/>
+                <Memoization
+                    list={[
+                        {
+                            text:'a',
+                            id:1,
+                        },
+                        {
+                            text:'b',
+                            id:2,
+                        },
+                        {
+                            text:'c',
+                            id:3,
+                        },
+                        {
+                            text:'d',
+                            id:4,
+                        },
+                        {
+                            text:'e',
+                            id:5,
+                        }
+                    ]}
+                />
             </div>
         )
     }
